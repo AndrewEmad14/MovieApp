@@ -23,7 +23,13 @@ class SecondScreen: UIViewController {
         ratingLabel.text = String(movieList[index].rating)
         releaseYearLabel.text=String(movieList[index].releaseYear)
         genreLabel.text=concatString(genre: movieList[index].genre)
-        secondScreenImage.image=UIImage(named: movieList[index].Image)
+        if movieList[index].Image == "4"{
+            secondScreenImage.image=UIImage(data:  movieList[index].ImageWithData)
+        }else{
+            secondScreenImage.image=UIImage(named: movieList[index].Image)
+        }
+       
+        
         
     }
     func concatString(genre:[String])->String{

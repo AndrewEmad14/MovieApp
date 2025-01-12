@@ -7,7 +7,12 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController ,addMovieProtocol{
+    func addMovie(aMovie: Movie) {
+        movieList.append(aMovie)
+        tableView.reloadData()
+    }
+    
     var movieList:[Movie]=[]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +30,20 @@ class TableViewController: UITableViewController {
         movieList.append(tempMovie2)
         movieList.append(tempMovie3)
         print(movieList.count)
+        let addButton = UIBarButtonItem(title: "+", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.addMovieButton))
+       
+       
+        self.navigationItem.rightBarButtonItem = addButton
+        
         
     }
-
+    @objc func addMovieButton (){
+          let view : AddMovieScreen=self.storyboard?.instantiateViewController(withIdentifier: "third") as! AddMovieScreen
+          view.delegate=self
+          self.present(view, animated: true)
+        
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,7 +65,12 @@ class TableViewController: UITableViewController {
        // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
       // print(content.text!)
         content.text = movieList[indexPath.row].title
-        content.image = UIImage(named: movieList[indexPath.row].Image)
+       if movieList[indexPath.row].Image == "4"{
+            content.image = UIImage(data: movieList[indexPath.row].ImageWithData)
+        }else{
+            content.image = UIImage(named: movieList[indexPath.row].Image)
+       }
+       
         content.imageProperties.maximumSize = CGSize(width: 90, height: 149)
         content.imageProperties.cornerRadius = 20
         cell.contentConfiguration=content

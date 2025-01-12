@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		486670962D33214800CCADBD /* AddingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670952D33214800CCADBD /* AddingProtocol.swift */; };
+		4866709A2D33230700CCADBD /* AddMovieScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670992D33230700CCADBD /* AddMovieScreen.swift */; };
 		48BC7DD32D2F2570006248D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BC7DD22D2F2570006248D8 /* AppDelegate.swift */; };
 		48BC7DD52D2F2570006248D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BC7DD42D2F2570006248D8 /* SceneDelegate.swift */; };
 		48BC7DDA2D2F2570006248D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BC7DD82D2F2570006248D8 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		486670952D33214800CCADBD /* AddingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingProtocol.swift; sourceTree = "<group>"; };
+		486670992D33230700CCADBD /* AddMovieScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieScreen.swift; sourceTree = "<group>"; };
 		48BC7DCF2D2F2570006248D8 /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48BC7DD22D2F2570006248D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48BC7DD42D2F2570006248D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				48BC7E042D2F2A32006248D8 /* Movie.swift */,
 				48BC7E062D2F2A62006248D8 /* TableViewController.swift */,
 				48BC7E0A2D2F3787006248D8 /* SecondScreen.swift */,
+				486670952D33214800CCADBD /* AddingProtocol.swift */,
+				486670992D33230700CCADBD /* AddMovieScreen.swift */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -266,7 +272,9 @@
 			files = (
 				48BC7DD32D2F2570006248D8 /* AppDelegate.swift in Sources */,
 				48BC7E052D2F2A32006248D8 /* Movie.swift in Sources */,
+				486670962D33214800CCADBD /* AddingProtocol.swift in Sources */,
 				48BC7DD52D2F2570006248D8 /* SceneDelegate.swift in Sources */,
+				4866709A2D33230700CCADBD /* AddMovieScreen.swift in Sources */,
 				48BC7E072D2F2A62006248D8 /* TableViewController.swift in Sources */,
 				48BC7E0B2D2F3787006248D8 /* SecondScreen.swift in Sources */,
 			);
