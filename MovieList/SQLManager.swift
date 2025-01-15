@@ -42,7 +42,7 @@ class SQLManager{
         create table MovieTable(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title String,
-        Image String,
+        Image Blob,
         rating Float,
         releaseYear int,
         genre String)
@@ -66,8 +66,7 @@ class SQLManager{
         if sqlite3_prepare_v2(dataBase, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK{
             var temp : NSString = movie.title as NSString
             sqlite3_bind_text(insertStatement, 1,temp.utf8String , -1, nil)
-            temp  = movie.Image as NSString
-            sqlite3_bind_text(insertStatement, 2,temp.utf8String , -1, nil)
+            sqlite3_bind_text(insertStatement, 2,(movie.ImageWithData! as NSData).bytes ,Int32(movie.ImageWithData!.count), nil)
             sqlite3_bind_double(insertStatement, 3, movie.rating)
             sqlite3_bind_int(insertStatement, 4, Int32(movie.releaseYear))
             temp = movie.genre as NSString
@@ -112,7 +111,7 @@ class SQLManager{
               print("title Query result is nil")
               return nil
             }
-            guard let queryResultCol2 = sqlite3_column_text(queryStatement, 2) else {
+            guard let queryResultCol2 = sqlite3_column_blob(queryStatement, 2) else {
               print("Image Query result is nil")
               return nil
             }
@@ -124,14 +123,14 @@ class SQLManager{
             }
           
           let title = String(cString: queryResultCol1)
-          let Image = String(cString: queryResultCol2)
+          let Image = Data(bytes: queryResultCol2, count: Int(sqlite3_column_bytes(queryStatement, 2)))
           let genre = String(cString: queryResultCol5)
           var movie = Movie()
           movie.title = title
           movie.rating = rating
           movie.releaseYear=Int(releaseYear)
           movie.genre = genre
-          movie.Image = Image
+          movie.ImageWithData = Image
           movieList.append(movie)
           print("\nQuery Result:")
           print("id =\(id) title= \(title) Image=\(Image) rating=  \(rating) releaseYear \(releaseYear) genre= \(genre)")

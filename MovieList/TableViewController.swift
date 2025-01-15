@@ -34,8 +34,8 @@ class TableViewController: UITableViewController ,addMovieProtocol{
  
         sql.setDBPath()
         sql.openDataBase()
-        sql.dropTable()
-        sql.createTable()
+        //sql.dropTable()
+       // sql.createTable()
        
         
         if sql.query() != nil{
@@ -86,8 +86,8 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
       // print(content.text!)
         content.text = movieList[indexPath.row].title
-        if movieList[indexPath.row].Image == "4"{
-            content.image = UIImage(data: movieList[indexPath.row].ImageWithData)
+        if movieList[indexPath.row].ImageWithData != nil {
+            content.image = UIImage(data: movieList[indexPath.row].ImageWithData!)
         }else{
             content.image = UIImage(named: "4")
        }
