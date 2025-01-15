@@ -43,7 +43,7 @@ class AddMovieScreen: UIViewController ,UIImagePickerControllerDelegate, UINavig
     @IBAction func DoneEditingButton(_ sender: Any) {
         var movie = Movie()
         movie.title = title_field.text!
-        movie.rating = Float(rating_field.text!)!
+        movie.rating = Double(rating_field.text!)!
         movie.releaseYear=Int(releaseYear_field.text!)!
         movie.genre.append(genreField.text!)
         movie.ImageWithData=imageData

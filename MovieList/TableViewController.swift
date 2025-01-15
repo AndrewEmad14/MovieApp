@@ -8,7 +8,10 @@
 import UIKit
 
 class TableViewController: UITableViewController ,addMovieProtocol{
+    
+    let sql=SQLManager.sharedInstance
     func addMovie(aMovie: Movie) {
+        sql.insertInTable(movie: aMovie)
         movieList.append(aMovie)
         tableView.reloadData()
     }
@@ -22,16 +25,34 @@ class TableViewController: UITableViewController ,addMovieProtocol{
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        let tempMovie1 = Movie(title: "Mission impossible", Image: "1", rating: 3.3, releaseYear: 1966, genre: ["action","thriller"])
-        let tempMovie2 = Movie(title: "Kung Fu panda", Image: "2", rating: 4, releaseYear: 2008, genre: ["action","animation","Family"])
-        let tempMovie3 = Movie(title: "Home Alone ", Image: "3", rating: 4, releaseYear: 1990, genre: ["comedy","Family"])
        
-        movieList.append(tempMovie1)
-        movieList.append(tempMovie2)
-        movieList.append(tempMovie3)
+        
         print(movieList.count)
-        let addButton = UIBarButtonItem(title: "+", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.addMovieButton))
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addMovieButton))
+        
+        
+ 
+        sql.setDBPath()
+        sql.openDataBase()
+        sql.dropTable()
+        sql.createTable()
        
+        
+        if sql.query() != nil{
+            
+            movieList=sql.query()!
+            print(movieList.count)
+
+        }else{
+            print("table is empty")
+        }
+       // sql.delete(index:1)
+        //sql.query()
+        sql.closeConnection()
+       // sql.query()
+       // sql.delete(index:1)
+        //sql.query()
+
        
         self.navigationItem.rightBarButtonItem = addButton
         
@@ -65,12 +86,12 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
       // print(content.text!)
         content.text = movieList[indexPath.row].title
-       if movieList[indexPath.row].Image == "4"{
+        if movieList[indexPath.row].Image == "4"{
             content.image = UIImage(data: movieList[indexPath.row].ImageWithData)
         }else{
-            content.image = UIImage(named: movieList[indexPath.row].Image)
+            content.image = UIImage(named: "4")
        }
-       
+        
         content.imageProperties.maximumSize = CGSize(width: 90, height: 149)
         content.imageProperties.cornerRadius = 20
         cell.contentConfiguration=content
