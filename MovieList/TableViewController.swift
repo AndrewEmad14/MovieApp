@@ -34,8 +34,8 @@ class TableViewController: UITableViewController ,addMovieProtocol{
  
         sql.setDBPath()
         sql.openDataBase()
-        //sql.dropTable()
-       // sql.createTable()
+       // sql.dropTable()
+        //sql.createTable()
        
         
         if sql.query() != nil{
@@ -46,12 +46,12 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         }else{
             print("table is empty")
         }
-       // sql.delete(index:1)
+    
         //sql.query()
         sql.closeConnection()
-       // sql.query()
-       // sql.delete(index:1)
-        //sql.query()
+   
+      
+       
 
        
         self.navigationItem.rightBarButtonItem = addButton
@@ -112,6 +112,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         if editingStyle == .delete{
             movieList.remove(at: indexPath.row)
             sql.delete(index:indexPath.row)
+            sql.resetSequence(aMovie: movieList)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

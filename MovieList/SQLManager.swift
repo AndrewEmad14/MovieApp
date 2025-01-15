@@ -158,8 +158,31 @@ class SQLManager{
       } else {
         print("\nDELETE statement could not be prepared")
       }
-      
       sqlite3_finalize(deleteStatement)
+     
+    }
+    func resetSequence(aMovie:[Movie]){
+        dropTable()
+        createTable()
+        for i in aMovie{
+            insertInTable(movie: i)
+
+        }
+      /*  let resetStatementString = """
+          UPDATE sqlite_sequence SET seq = (SELECT MAX(Id) FROM MovieTable) WHERE name="MovieTable"
+     """
+          var resetStatement: OpaquePointer?
+          if sqlite3_prepare_v2(dataBase, resetStatementString, -1, &resetStatement, nil) ==
+              SQLITE_OK {
+            if sqlite3_step(resetStatement) == SQLITE_DONE {
+              print("\nSuccessfully reseted row.")
+            } else {
+              print("\nCould not rested row.")
+            }
+          } else {
+            print("\nDELETE statement could not be prepared")
+          }
+          sqlite3_finalize(resetStatement)*/
     }
     func closeConnection(){
         sqlite3_close(dataBase)
