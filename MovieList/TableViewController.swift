@@ -105,7 +105,16 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         view.index=indexPath.row
         self.navigationController?.pushViewController(view, animated: true)
     }
-
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            movieList.remove(at: indexPath.row)
+            sql.delete(index:indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 
 
   
