@@ -6,39 +6,61 @@
 //
 
 import UIKit
-
+import SDWebImage
 class TableViewController: UITableViewController ,addMovieProtocol{
-    
-    let sql=SQLManager.sharedInstance
+    var movieList:[Movie]=[]
+
+   let sql=SQLManager.sharedInstance
     func addMovie(aMovie: Movie) {
-        sql.insertInTable(movie: aMovie)
+        //sql.insertInTable(movie: aMovie)
         movieList.append(aMovie)
         tableView.reloadData()
     }
+    func loadArrayFromWebsite(Url str: String){
+        let url=URL(string: str)
+        let request = URLRequest(url: url!)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let task = session.dataTask(with: request) {
+            data, response, error in
+            do{
+                let json = try JSONDecoder().decode([Movie].self, from: data!)
+                
+               /* var json = try JSONSerialization.jsonObject(with: data!) as! [[String:String]]
+                var dict=json[0]*/
+                //print("title: \(String(self.movieList[0].title))")
+                
+                DispatchQueue.main.async {
+                    self.movieList=json
+                    self.tableView.reloadData()
+                }
+            }catch{
+                print(error)
+            }
+        }
+        task.resume()
+        
+    }
     
-    var movieList:[Movie]=[]
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+      
        
         
         print(movieList.count)
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addMovieButton))
-        
-        
- 
-        sql.setDBPath()
-        sql.openDataBase()
+     
+           loadArrayFromWebsite(Url:  "https://www.freetestapi.com/api/v1/movies")
+
+      
+      
+     //   sql.setDBPath()
+       // sql.openDataBase()
        // sql.dropTable()
         //sql.createTable()
        
         
-        if sql.query() != nil{
+      /*  if sql.query() != nil{
             
             movieList=sql.query()!
             print(movieList.count)
@@ -48,12 +70,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         }
     
         //sql.query()
-        sql.closeConnection()
-   
-      
-       
-
-       
+        sql.closeConnection()*/
         self.navigationItem.rightBarButtonItem = addButton
         
         
@@ -86,11 +103,14 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
       // print(content.text!)
         content.text = movieList[indexPath.row].title
-        if movieList[indexPath.row].ImageWithData != nil {
+        let myImageView = UIImageView()
+        myImageView.sd_setImage(with: URL(string: movieList[indexPath.row].poster), placeholderImage: UIImage(named: "4"))
+        content.image = myImageView.image
+       /* if movieList[indexPath.row].ImageWithData != nil {
             content.image = UIImage(data: movieList[indexPath.row].ImageWithData!)
         }else{
             content.image = UIImage(named: "4")
-       }
+       }*/
         
         content.imageProperties.maximumSize = CGSize(width: 90, height: 149)
         content.imageProperties.cornerRadius = 20
@@ -101,6 +121,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
     }
     override func tableView(_ tableView: UITableView, performPrimaryActionForRowAt indexPath: IndexPath) {
         let view : SecondScreen = self.storyboard?.instantiateViewController(withIdentifier: "second") as! SecondScreen
+        
         view.movieList=movieList
         view.index=indexPath.row
         self.navigationController?.pushViewController(view, animated: true)
@@ -111,8 +132,9 @@ class TableViewController: UITableViewController ,addMovieProtocol{
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             movieList.remove(at: indexPath.row)
-            sql.delete(index:indexPath.row)
-            sql.resetSequence(aMovie: movieList)
+        
+           // sql.delete(index:indexPath.row)
+            //sql.resetSequence(aMovie: movieList)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

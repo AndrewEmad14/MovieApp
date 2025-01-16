@@ -44,9 +44,9 @@ class AddMovieScreen: UIViewController ,UIImagePickerControllerDelegate, UINavig
         var movie = Movie()
         movie.title = title_field.text!
         movie.rating = Double(rating_field.text!)!
-        movie.releaseYear=Int(releaseYear_field.text!)!
+        movie.year=Int(releaseYear_field.text!)!
         movie.genre.append(genreField.text!)
-        movie.ImageWithData=imageData
+   
        
         delegate?.addMovie(aMovie: movie)
         self.dismiss(animated: true)

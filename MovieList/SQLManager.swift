@@ -58,7 +58,7 @@ class SQLManager{
         }
         sqlite3_finalize(createTableStatement)
     }
-    func insertInTable(movie:Movie){
+ /*   func insertInTable(movie:Movie){
         var insertStatement:OpaquePointer?
         let insertStatementString = """
         INSERT INTO MovieTable (title,Image,rating,releaseYear,genre) VALUES(?,?,?,?,?);
@@ -68,7 +68,7 @@ class SQLManager{
             sqlite3_bind_text(insertStatement, 1,temp.utf8String , -1, nil)
             sqlite3_bind_text(insertStatement, 2,(movie.ImageWithData! as NSData).bytes ,Int32(movie.ImageWithData!.count), nil)
             sqlite3_bind_double(insertStatement, 3, movie.rating)
-            sqlite3_bind_int(insertStatement, 4, Int32(movie.releaseYear))
+            sqlite3_bind_int(insertStatement, 4, Int32(movie.year))
             temp = movie.genre as NSString
             sqlite3_bind_text(insertStatement, 5,temp.utf8String , -1, nil)
             
@@ -81,8 +81,10 @@ class SQLManager{
             print("inset statement Not prepared")
         }
         sqlite3_finalize(insertStatement)
-    }
-    func dropTable (){
+    }*/
+    
+    
+   /* func dropTable (){
         var dropTableStatement: OpaquePointer?
         let dropStatement="""
         Drop Table MovieTable
@@ -97,8 +99,9 @@ class SQLManager{
            print("Drop Statement isnt prepared")
        }
        sqlite3_finalize(dropTableStatement)
-    }
-    func query()->[Movie]? {
+    }*/
+    
+   /* func query()->[Movie]? {
       let queryStatementString="SELECT * FROM MovieTable;"
       var queryStatement: OpaquePointer?
         var movieList:[Movie]=[]
@@ -128,7 +131,7 @@ class SQLManager{
           var movie = Movie()
           movie.title = title
           movie.rating = rating
-          movie.releaseYear=Int(releaseYear)
+          movie.year=Int(releaseYear)
           movie.genre = genre
           movie.ImageWithData = Image
           movieList.append(movie)
@@ -142,10 +145,10 @@ class SQLManager{
       // 7
        return movieList
       
-    }
+    }*/
    
 
-    func delete(index : Int) {
+   /* func delete(index : Int) {
     let deleteStatementString = "DELETE FROM MovieTable WHERE Id = \(index);"
       var deleteStatement: OpaquePointer?
       if sqlite3_prepare_v2(dataBase, deleteStatementString, -1, &deleteStatement, nil) ==
@@ -187,6 +190,6 @@ class SQLManager{
     func closeConnection(){
         sqlite3_close(dataBase)
     }
-    
+    */
 }
 
