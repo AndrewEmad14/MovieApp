@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddMovieScreen: UIViewController ,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @IBOutlet weak var movieImage: UIImageView!
@@ -41,13 +42,32 @@ class AddMovieScreen: UIViewController ,UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func DoneEditingButton(_ sender: Any) {
-        var movie = Movie()
-        movie.title = title_field.text!
-        movie.rating = Double(rating_field.text!)!
-        movie.releaseYear=Int(releaseYear_field.text!)!
-        movie.genre.append(genreField.text!)
-        movie.ImageWithData=imageData
-       
+        let movie = Movie()
+        movie.setTitle(title: title_field.text!)
+        movie.setRating (rating: Double(rating_field.text!)!)
+        movie.setReleaseYear(release: Int64(Int(releaseYear_field.text!)!))
+        movie.setGenre(genre: genreField.text!)
+        movie.setImage(image: imageData)
+        //core data code
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let manager: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        // entity
+        let movieEntity = NSEntityDescription.entity(forEntityName: "Movie", in: manager)
+        let movieDB = NSManagedObject(entity: movieEntity!, insertInto: manager)
+        
+        movieDB.setValue(movie.title, forKey: "title")
+       movieDB.setValue(movie.rating, forKey: "rating")
+        movieDB.setValue(movie.releaseYear, forKey: "releaseYear")
+       movieDB.setValue(movie.imageWithData, forKey: "imageWithData")
+       movieDB.setValue(movie.genre, forKey: "genre")
+        do{
+            try manager.save()
+            print("Saved to core Data")
+        }catch let error{
+            print(error)
+        }
         delegate?.addMovie(aMovie: movie)
         self.dismiss(animated: true)
     }

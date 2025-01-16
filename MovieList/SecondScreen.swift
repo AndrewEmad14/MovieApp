@@ -23,8 +23,8 @@ class SecondScreen: UIViewController {
         ratingLabel.text = String(movieList[index].rating)
         releaseYearLabel.text=String(movieList[index].releaseYear)
         genreLabel.text=movieList[index].genre
-        if movieList[index].ImageWithData != nil{
-            secondScreenImage.image=UIImage(data:  movieList[index].ImageWithData!)
+        if movieList[index].imageWithData != nil{
+            secondScreenImage.image=UIImage(data:  movieList[index].imageWithData!)
         }else{
             secondScreenImage.image=UIImage(named: "4")
         }

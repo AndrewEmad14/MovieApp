@@ -9,9 +9,9 @@ import UIKit
 
 class TableViewController: UITableViewController ,addMovieProtocol{
     
-    let sql=SQLManager.sharedInstance
+   // let sql=SQLManager.sharedInstance
     func addMovie(aMovie: Movie) {
-        sql.insertInTable(movie: aMovie)
+    //    sql.insertInTable(movie: aMovie)
         movieList.append(aMovie)
         tableView.reloadData()
     }
@@ -32,13 +32,13 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         
         
  
-        sql.setDBPath()
-        sql.openDataBase()
+       // sql.setDBPath()
+       // sql.openDataBase()
        // sql.dropTable()
         //sql.createTable()
        
         
-        if sql.query() != nil{
+      /*  if sql.query() != nil{
             
             movieList=sql.query()!
             print(movieList.count)
@@ -48,7 +48,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         }
     
         //sql.query()
-        sql.closeConnection()
+        sql.closeConnection()*/
    
       
        
@@ -86,8 +86,8 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
       // print(content.text!)
         content.text = movieList[indexPath.row].title
-        if movieList[indexPath.row].ImageWithData != nil {
-            content.image = UIImage(data: movieList[indexPath.row].ImageWithData!)
+        if movieList[indexPath.row].imageWithData != nil {
+            content.image = UIImage(data: movieList[indexPath.row].imageWithData!)
         }else{
             content.image = UIImage(named: "4")
        }
@@ -105,17 +105,17 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         view.index=indexPath.row
         self.navigationController?.pushViewController(view, animated: true)
     }
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+ /*   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             movieList.remove(at: indexPath.row)
-            sql.delete(index:indexPath.row)
-            sql.resetSequence(aMovie: movieList)
+           // sql.delete(index:indexPath.row)
+           // sql.resetSequence(aMovie: movieList)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    }
+    }*/
 
 
   
