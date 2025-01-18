@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import CoreData
 class TableViewController: UITableViewController ,addMovieProtocol{
     var movieList:[Movie]=[]
 
@@ -40,7 +41,27 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         task.resume()
         
     }
-    
+   func  loadArrayFromCoreData(){
+       var ManagedMovies:[NSManagedObject]
+       let appdelegate = UIApplication.shared.delegate as!AppDelegate
+       let managedContext=appdelegate.persistentContainer.viewContext
+       let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movies")
+       do{
+           ManagedMovies = try managedContext.fetch(fetchRequest)
+           for i in ManagedMovies{
+               var tempMovie = Movie()
+               tempMovie.title = i.value(forKey: "title")as! String
+               tempMovie.rating = i.value(forKey: "rating") as! Double
+               tempMovie.releaseYear = i.value(forKey: "releaseYear") as! Int64
+               tempMovie.genre = i.value(forKey: "genre") as! String
+               tempMovie.imageWithData = i.value(forKey: "imageWithData") as? Data
+               movieList.append(tempMovie)
+           }
+       }catch let error as NSError{
+           print(error)
+       }
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

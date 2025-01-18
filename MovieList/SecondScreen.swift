@@ -35,21 +35,13 @@ class SecondScreen: UIViewController {
         titleLabel.text=movieList[index].title
         ratingLabel.text = String(movieList[index].rating)
         releaseYearLabel.text=String(movieList[index].year)
-        var myImageView=UIImageView()
+       
      
         secondScreenImage.sd_setImage(with: URL(string: movieList[index].poster), placeholderImage: UIImage(named: "4"))
         genreLabel.text=concatString(genre: movieList[index].genre)
         idLabel.text=String(movieList[index].id)
         actorsLabel.text=concatString(genre: movieList[index].actors)
-        directorLabel.text = movieList[index].director
-        trailerLabel.text = movieList[index].trailer
-        runtime.text = String(movieList[index].runtime)
-        awards.text = movieList[index].awards
-        country.text=movieList[index].country
-        languageLabel.text=movieList[index].language
-        boxOfficeLabel.text=movieList[index].boxOffice
-        websiteLabel.text=movieList[index].website
-        plotLabel.text=movieList[index].plot
+ 
 
         
        // genreLabel.text=movieList[index].genre

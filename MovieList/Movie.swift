@@ -17,16 +17,7 @@ struct Movie : Codable{
     var poster:String="4"   //
     var genre : [String] = []    //
     var actors :[String] = []
-    var director:String=""
-    var trailer:String=""
-    var runtime:Int=0
-    var awards:String=""
-    var country:String=""
-    var language:String=""
-    var boxOffice:String=""
-    var production:String=""
-    var website:String=""
-    var plot:String=""
+   
     init(){
         
     }
@@ -37,17 +28,7 @@ struct Movie : Codable{
         self.year = year
         self.poster = poster
         self.genre = genre
-        self.director = director
-        self.trailer = trailer
-        self.runtime = runtime
-        self.awards = awards
-        self.country = country
-        self.language = language
-        self.boxOffice = boxOffice
-        self.production = production
-        self.website = website
-        self.actors = actor
-        self.plot = plot
+  
     }
     
    
