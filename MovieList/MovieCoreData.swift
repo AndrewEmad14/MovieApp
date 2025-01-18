@@ -13,11 +13,11 @@ struct MovieCoreData {
       var rating:Double=0.0   //
       var year:Int=0          //
       var poster=Data()  //
-      var genre : [String] = []    //
+      var genre : String=""//
     init(){
         
     }
-    init(title: String, rating: Double, year: Int, poster: Data = Data(), genre: [String]) {
+    init(title: String, rating: Double, year: Int, poster: Data = Data(), genre: String) {
         self.title = title
         self.rating = rating
         self.year = year

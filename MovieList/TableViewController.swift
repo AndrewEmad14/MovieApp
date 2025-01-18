@@ -32,6 +32,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
                 
                 DispatchQueue.main.async {
                     self.movieList=json
+                    self.saveDataFromWebToCoreData()
                     self.tableView.reloadData()
                 }
             }catch{
@@ -53,7 +54,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
                tempMovie.title = i.value(forKey: "title")as! String
                tempMovie.rating = i.value(forKey: "rating") as! Double
                tempMovie.year = Int(i.value(forKey: "year") as! Int64)
-               tempMovie.genre = i.value(forKey: "genre") as! [String]
+               tempMovie.genre = i.value(forKey: "genre") as! String
                tempMovie.poster = i.value(forKey: "poster") as! Data
                movieCoreDataList.append(tempMovie)
            }
@@ -62,8 +63,39 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        }
 
     }
+    func concatStrArray(array:[String])->String{
+        var temp:String=""
+        for i in array{
+            temp += i
+            temp += ","
+        }
+        return temp
+    }
     func saveDataFromWebToCoreData(){
-        
+        for movie in movieList{
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let manager: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+            // entity
+            let movieEntity = NSEntityDescription.entity(forEntityName: "MovieDB", in: manager)
+            let movieDB = NSManagedObject(entity: movieEntity!, insertInto: manager)
+            let tempGenre=concatStrArray(array: movie.genre)
+            let myImageView = UIImageView()
+            myImageView.sd_setImage(with: URL(string: movie.poster), placeholderImage: UIImage(named: "4"))
+            let tempImageData=myImageView.image?.pngData()
+            movieDB.setValue(movie.title, forKey: "title")
+            movieDB.setValue(movie.rating, forKey: "rating")
+            movieDB.setValue(movie.year, forKey: "year")
+            movieDB.setValue(tempImageData, forKey: "poster")
+            movieDB.setValue(tempGenre, forKey: "genre")
+            do{
+                try manager.save()
+                print("Saved to core Data")
+            }catch let error{
+                print(error)
+            }
+        }
+      
     }
     override func viewDidLoad() {
         super.viewDidLoad()
