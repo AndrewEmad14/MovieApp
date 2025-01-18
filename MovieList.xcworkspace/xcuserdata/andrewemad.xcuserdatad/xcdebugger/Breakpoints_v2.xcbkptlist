@@ -79,6 +79,21 @@
                   endingLineNumber = "46"
                   offsetFromSymbolStart = "540">
                </Location>
+               <Location
+                  uuid = "5ECD5381-FFD2-424E-9C0F-176B1B50912D - 74c81b62719c9926"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieList.AddMovieScreen.DoneEditingButton(Any) -&gt; ()"
+                  moduleName = "MovieList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrewemad/Documents/ios%20using%20swift/MovieList/MovieList/AddMovieScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "653">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

@@ -39,9 +39,8 @@ class SecondScreen: UIViewController {
      
         secondScreenImage.sd_setImage(with: URL(string: movieList[index].poster), placeholderImage: UIImage(named: "4"))
         genreLabel.text=concatString(genre: movieList[index].genre)
-        idLabel.text=String(movieList[index].id)
-        actorsLabel.text=concatString(genre: movieList[index].actors)
- 
+       
+      
 
         
        // genreLabel.text=movieList[index].genre

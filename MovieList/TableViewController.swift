@@ -10,7 +10,7 @@ import SDWebImage
 import CoreData
 class TableViewController: UITableViewController ,addMovieProtocol{
     var movieList:[Movie]=[]
-
+    var movieCoreDataList:[MovieCoreData]=[]
    let sql=SQLManager.sharedInstance
     func addMovie(aMovie: Movie) {
         //sql.insertInTable(movie: aMovie)
@@ -49,18 +49,21 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        do{
            ManagedMovies = try managedContext.fetch(fetchRequest)
            for i in ManagedMovies{
-               var tempMovie = Movie()
+               var tempMovie = MovieCoreData()
                tempMovie.title = i.value(forKey: "title")as! String
                tempMovie.rating = i.value(forKey: "rating") as! Double
-               tempMovie.releaseYear = i.value(forKey: "releaseYear") as! Int64
-               tempMovie.genre = i.value(forKey: "genre") as! String
-               tempMovie.imageWithData = i.value(forKey: "imageWithData") as? Data
-               movieList.append(tempMovie)
+               tempMovie.year = Int(i.value(forKey: "year") as! Int64)
+               tempMovie.genre = i.value(forKey: "genre") as! [String]
+               tempMovie.poster = i.value(forKey: "poster") as! Data
+               movieCoreDataList.append(tempMovie)
            }
        }catch let error as NSError{
            print(error)
        }
 
+    }
+    func saveDataFromWebToCoreData(){
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
