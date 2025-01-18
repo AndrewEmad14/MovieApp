@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		486670962D33214800CCADBD /* AddingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670952D33214800CCADBD /* AddingProtocol.swift */; };
 		4866709A2D33230700CCADBD /* AddMovieScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670992D33230700CCADBD /* AddMovieScreen.swift */; };
+		4897FD9B2D3C1A5B0041C0D9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897FD9A2D3C1A5B0041C0D9 /* Reachability.swift */; };
 		48A0F3562D37082000AA8C39 /* SQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0F3552D37082000AA8C39 /* SQLManager.swift */; };
 		48AB67752D3C051B002353A2 /* MovieCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB67742D3C051B002353A2 /* MovieCoreData.swift */; };
 		48AB67782D3C0680002353A2 /* MovieCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48AB67762D3C0680002353A2 /* MovieCD.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		486670952D33214800CCADBD /* AddingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingProtocol.swift; sourceTree = "<group>"; };
 		486670992D33230700CCADBD /* AddMovieScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieScreen.swift; sourceTree = "<group>"; };
+		4897FD9A2D3C1A5B0041C0D9 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../../../../Downloads/Reachability.swift; sourceTree = "<group>"; };
 		48A0F3552D37082000AA8C39 /* SQLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLManager.swift; sourceTree = "<group>"; };
 		48AB67742D3C051B002353A2 /* MovieCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCoreData.swift; sourceTree = "<group>"; };
 		48AB67772D3C0680002353A2 /* MovieCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieCD.xcdatamodel; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				48BC7E062D2F2A62006248D8 /* TableViewController.swift */,
 				48BC7E0A2D2F3787006248D8 /* SecondScreen.swift */,
 				486670952D33214800CCADBD /* AddingProtocol.swift */,
+				4897FD9A2D3C1A5B0041C0D9 /* Reachability.swift */,
 				486670992D33230700CCADBD /* AddMovieScreen.swift */,
 				48A0F3552D37082000AA8C39 /* SQLManager.swift */,
 				48AB67742D3C051B002353A2 /* MovieCoreData.swift */,
@@ -354,6 +357,7 @@
 				48BC7DD52D2F2570006248D8 /* SceneDelegate.swift in Sources */,
 				4866709A2D33230700CCADBD /* AddMovieScreen.swift in Sources */,
 				48AB67752D3C051B002353A2 /* MovieCoreData.swift in Sources */,
+				4897FD9B2D3C1A5B0041C0D9 /* Reachability.swift in Sources */,
 				48BC7E072D2F2A62006248D8 /* TableViewController.swift in Sources */,
 				48A0F3562D37082000AA8C39 /* SQLManager.swift in Sources */,
 				48BC7E0B2D2F3787006248D8 /* SecondScreen.swift in Sources */,

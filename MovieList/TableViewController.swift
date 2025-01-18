@@ -8,7 +8,9 @@
 import UIKit
 import SDWebImage
 import CoreData
+
 class TableViewController: UITableViewController ,addMovieProtocol{
+    let reachability = try! Reachability()
     var movieList:[Movie]=[]
     var movieCoreDataList:[MovieCoreData]=[]
    let sql=SQLManager.sharedInstance
@@ -46,7 +48,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        var ManagedMovies:[NSManagedObject]
        let appdelegate = UIApplication.shared.delegate as!AppDelegate
        let managedContext=appdelegate.persistentContainer.viewContext
-       let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movies")
+       let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieDB")
        do{
            ManagedMovies = try managedContext.fetch(fetchRequest)
            for i in ManagedMovies{
@@ -61,7 +63,8 @@ class TableViewController: UITableViewController ,addMovieProtocol{
        }catch let error as NSError{
            print(error)
        }
-
+ 
+       tableView.reloadData()
     }
     func concatStrArray(array:[String])->String{
         var temp:String=""
@@ -90,7 +93,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
             movieDB.setValue(tempGenre, forKey: "genre")
             do{
                 try manager.save()
-                print("Saved to core Data")
+               
             }catch let error{
                 print(error)
             }
@@ -99,37 +102,44 @@ class TableViewController: UITableViewController ,addMovieProtocol{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
-       
-        
-        print(movieList.count)
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addMovieButton))
-     
-           loadArrayFromWebsite(Url:  "https://www.freetestapi.com/api/v1/movies")
-
-      
-      
-     //   sql.setDBPath()
-       // sql.openDataBase()
-       // sql.dropTable()
-        //sql.createTable()
-       
-        
-      /*  if sql.query() != nil{
-            
-            movieList=sql.query()!
-            print(movieList.count)
-
-        }else{
-            print("table is empty")
-        }
-    
-        //sql.query()
-        sql.closeConnection()*/
         self.navigationItem.rightBarButtonItem = addButton
+       
+           
+
+            reachability.whenReachable = { reachability in
+                if reachability.connection == .wifi {
+                    self.loadArrayFromWebsite(Url:  "https://www.freetestapi.com/api/v1/movies")
+                } else {
+                    print("Reachable via Cellular")
+                }
+            }
+            reachability.whenUnreachable = { _ in
+                self.loadArrayFromCoreData()
+            }
+
+            do {
+                try reachability.startNotifier()
+            } catch {
+                print("Unable to start notifier")
+            }
+
+      
         
         
+    }
+    @objc func reachabilityChanged(note: Notification) {
+
+      let reachability = note.object as! Reachability
+
+      switch reachability.connection {
+      case .wifi:
+          print("Reachable via WiFi")
+      case .cellular:
+          print("Reachable via Cellular")
+      case .unavailable:
+        print("Network not reachable")
+      }
     }
     @objc func addMovieButton (){
           let view : AddMovieScreen=self.storyboard?.instantiateViewController(withIdentifier: "third") as! AddMovieScreen
@@ -147,7 +157,15 @@ class TableViewController: UITableViewController ,addMovieProtocol{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movieList.count
+        if movieList.count != 0{
+            return movieList.count
+
+        }
+        if movieCoreDataList.count != 0{
+            return movieCoreDataList.count
+
+        }
+        return 0
     }
 
   
@@ -155,23 +173,23 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-       // cell.textLabel!.text=movieList[indexPath.row].title
-       // cell.imageView!.image = UIImage(named: movieList[indexPath.row].Image)
-      // print(content.text!)
-        content.text = movieList[indexPath.row].title
         let myImageView = UIImageView()
-        myImageView.sd_setImage(with: URL(string: movieList[indexPath.row].poster), placeholderImage: UIImage(named: "4"))
+        if movieList.count != 0{
+            content.text = movieList[indexPath.row].title
+            myImageView.sd_setImage(with: URL(string: movieList[indexPath.row].poster), placeholderImage: UIImage(named: "4"))
+        }else if movieCoreDataList.count != 0{
+            content.text = movieCoreDataList[indexPath.row].title
+           
+            myImageView.image=UIImage(data: movieCoreDataList[indexPath.row].poster)
+        }
+      
         content.image = myImageView.image
-       /* if movieList[indexPath.row].ImageWithData != nil {
-            content.image = UIImage(data: movieList[indexPath.row].ImageWithData!)
-        }else{
-            content.image = UIImage(named: "4")
-       }*/
+      
         
         content.imageProperties.maximumSize = CGSize(width: 90, height: 149)
         content.imageProperties.cornerRadius = 20
         cell.contentConfiguration=content
-        // Configure the cell...
+       
 
         return cell
     }
@@ -179,6 +197,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         let view : SecondScreen = self.storyboard?.instantiateViewController(withIdentifier: "second") as! SecondScreen
         
         view.movieList=movieList
+        view.movieCoreDataList=movieCoreDataList
         view.index=indexPath.row
         self.navigationController?.pushViewController(view, animated: true)
     }

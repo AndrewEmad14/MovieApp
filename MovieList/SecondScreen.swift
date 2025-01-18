@@ -26,30 +26,34 @@ class SecondScreen: UIViewController {
     @IBOutlet weak var websiteLabel: UILabel!
     @IBOutlet weak var plotLabel: UILabel!
     var movieList:[Movie]=[]
+    var movieCoreDataList:[MovieCoreData]=[]
     var index:Int=0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.text=movieList[index].title
-        ratingLabel.text = String(movieList[index].rating)
-        releaseYearLabel.text=String(movieList[index].year)
+        if movieList.count != 0 {
+            titleLabel.text=movieList[index].title
+            ratingLabel.text = String(movieList[index].rating)
+            releaseYearLabel.text=String(movieList[index].year)
+            secondScreenImage.sd_setImage(with: URL(string: movieList[index].poster), placeholderImage: UIImage(named: "4"))
+            genreLabel.text=concatString(genre: movieList[index].genre)
+           
+        } else if movieCoreDataList.count != 0 {
+            titleLabel.text=movieCoreDataList[index].title
+            ratingLabel.text = String(movieCoreDataList[index].rating)
+            releaseYearLabel.text=String(movieCoreDataList[index].year)
+            secondScreenImage.image=UIImage(data: movieCoreDataList[index].poster)
+            genreLabel.text=movieCoreDataList[index].genre
+        }
+        
        
      
-        secondScreenImage.sd_setImage(with: URL(string: movieList[index].poster), placeholderImage: UIImage(named: "4"))
-        genreLabel.text=concatString(genre: movieList[index].genre)
        
       
 
-        
-       // genreLabel.text=movieList[index].genre
-       /* if movieList[index].ImageWithData != nil{
-            secondScreenImage.image=UIImage(data:  movieList[index].ImageWithData!)
-        }else{
-            secondScreenImage.image=UIImage(named: "4")
-        }*/
-       
+ 
         
         
     }

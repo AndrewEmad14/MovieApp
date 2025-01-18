@@ -5,6 +5,7 @@ target 'MovieList' do
   use_frameworks!
 
   pod 'SDWebImage', '~> 5.0'
+ 
   # Pods for image view
 
 end
