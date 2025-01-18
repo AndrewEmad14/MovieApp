@@ -42,19 +42,19 @@ class AddMovieScreen: UIViewController ,UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func DoneEditingButton(_ sender: Any) {
-        let movie = Movie()
-        movie.setTitle(title: title_field.text!)
-        movie.setRating (rating: Double(rating_field.text!)!)
-        movie.setReleaseYear(release: Int64(Int(releaseYear_field.text!)!))
-        movie.setGenre(genre: genreField.text!)
-        movie.setImage(image: imageData)
+        var movie = Movie()
+        movie.title = title_field.text!
+        movie.rating = Double(rating_field.text!)!
+        movie.releaseYear = Int64(Int(releaseYear_field.text!)!)
+        movie.genre = genreField.text!
+        movie.imageWithData = imageData
         //core data code
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let manager: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         // entity
-        let movieEntity = NSEntityDescription.entity(forEntityName: "Movie", in: manager)
+        let movieEntity = NSEntityDescription.entity(forEntityName: "Movies", in: manager)
         let movieDB = NSManagedObject(entity: movieEntity!, insertInto: manager)
         
         movieDB.setValue(movie.title, forKey: "title")
