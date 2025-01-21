@@ -31,7 +31,8 @@ class SecondScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //UserDefaults.standard.set(["ar"], forKey: "AppleLanguages")
+       // UserDefaults.standard.synchronize()
         // Do any additional setup after loading the view.
         if movieList.count != 0 {
             titleLabel.text=movieList[index].title
@@ -48,9 +49,9 @@ class SecondScreen: UIViewController {
             genreLabel.text=movieCoreDataList[index].genre
         }
         
-       
+        self.navigationItem.title=NSLocalizedString("NavTitle", comment: "")
      
-       
+        print(self.navigationItem.title)
       
 
  

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		486670962D33214800CCADBD /* AddingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670952D33214800CCADBD /* AddingProtocol.swift */; };
 		4866709A2D33230700CCADBD /* AddMovieScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486670992D33230700CCADBD /* AddMovieScreen.swift */; };
+		4891772C2D3F00BC0092E3EC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4891772B2D3F00BC0092E3EC /* Localizable.xcstrings */; };
 		4897FD9B2D3C1A5B0041C0D9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897FD9A2D3C1A5B0041C0D9 /* Reachability.swift */; };
 		48A0F3562D37082000AA8C39 /* SQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0F3552D37082000AA8C39 /* SQLManager.swift */; };
 		48AB67752D3C051B002353A2 /* MovieCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB67742D3C051B002353A2 /* MovieCoreData.swift */; };
@@ -47,6 +48,10 @@
 /* Begin PBXFileReference section */
 		486670952D33214800CCADBD /* AddingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingProtocol.swift; sourceTree = "<group>"; };
 		486670992D33230700CCADBD /* AddMovieScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieScreen.swift; sourceTree = "<group>"; };
+		489177242D3EF26F0092E3EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		489177292D3EF7FD0092E3EC /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		4891772A2D3EF7FD0092E3EC /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4891772B2D3F00BC0092E3EC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4897FD9A2D3C1A5B0041C0D9 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../../../../Downloads/Reachability.swift; sourceTree = "<group>"; };
 		48A0F3552D37082000AA8C39 /* SQLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLManager.swift; sourceTree = "<group>"; };
 		48AB67742D3C051B002353A2 /* MovieCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCoreData.swift; sourceTree = "<group>"; };
@@ -133,10 +138,10 @@
 				48BC7DD22D2F2570006248D8 /* AppDelegate.swift */,
 				48BC7DD42D2F2570006248D8 /* SceneDelegate.swift */,
 				48BC7DD82D2F2570006248D8 /* Main.storyboard */,
-				48BC7DDB2D2F2572006248D8 /* Assets.xcassets */,
 				48BC7DDD2D2F2572006248D8 /* LaunchScreen.storyboard */,
 				48BC7DE02D2F2572006248D8 /* Info.plist */,
 				48BC7E042D2F2A32006248D8 /* Movie.swift */,
+				48BC7DDB2D2F2572006248D8 /* Assets.xcassets */,
 				48BC7E062D2F2A62006248D8 /* TableViewController.swift */,
 				48BC7E0A2D2F3787006248D8 /* SecondScreen.swift */,
 				486670952D33214800CCADBD /* AddingProtocol.swift */,
@@ -145,6 +150,7 @@
 				48A0F3552D37082000AA8C39 /* SQLManager.swift */,
 				48AB67742D3C051B002353A2 /* MovieCoreData.swift */,
 				48AB67762D3C0680002353A2 /* MovieCD.xcdatamodeld */,
+				4891772B2D3F00BC0092E3EC /* Localizable.xcstrings */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 48BC7DC62D2F2570006248D8;
 			productRefGroup = 48BC7DD02D2F2570006248D8 /* Products */;
@@ -283,6 +290,7 @@
 			files = (
 				48BC7DDF2D2F2572006248D8 /* LaunchScreen.storyboard in Resources */,
 				48BC7DDC2D2F2572006248D8 /* Assets.xcassets in Resources */,
+				4891772C2D3F00BC0092E3EC /* Localizable.xcstrings in Resources */,
 				48BC7DDA2D2F2570006248D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +409,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				48BC7DD92D2F2570006248D8 /* Base */,
+				489177242D3EF26F0092E3EC /* en */,
+				489177292D3EF7FD0092E3EC /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -409,6 +419,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				48BC7DDE2D2F2572006248D8 /* Base */,
+				4891772A2D3EF7FD0092E3EC /* ar */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -421,6 +432,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -484,6 +496,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

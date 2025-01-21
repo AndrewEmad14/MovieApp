@@ -105,8 +105,7 @@ class TableViewController: UITableViewController ,addMovieProtocol{
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addMovieButton))
         self.navigationItem.rightBarButtonItem = addButton
        
-           
-
+      
             reachability.whenReachable = { reachability in
                 if reachability.connection == .wifi {
                     self.loadArrayFromWebsite(Url:  "https://www.freetestapi.com/api/v1/movies")
