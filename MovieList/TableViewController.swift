@@ -28,10 +28,6 @@ class TableViewController: UITableViewController ,addMovieProtocol{
             do{
                 let json = try JSONDecoder().decode([Movie].self, from: data!)
                 
-               /* var json = try JSONSerialization.jsonObject(with: data!) as! [[String:String]]
-                var dict=json[0]*/
-                //print("title: \(String(self.movieList[0].title))")
-                
                 DispatchQueue.main.async {
                     self.movieList=json
                     self.saveDataFromWebToCoreData()
